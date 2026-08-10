@@ -10,12 +10,11 @@ GameWindow::GameWindow(QWidget *parent)
     : QGraphicsView(parent), m_scene(nullptr), m_pacman(nullptr), m_collisionTimer(nullptr)
 {
     setAttribute(Qt::WA_DeleteOnClose);
-    setFixedSize(820, 820);
+    setMinimumSize(GAME_SIZE + 20, GAME_SIZE + 20);
     setWindowTitle("Pac-Man Maze Game");
     setFocusPolicy(Qt::StrongFocus);
     setRenderHint(QPainter::Antialiasing);
     setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
-    setBackgroundBrush(Qt::black);
 }
 
 void GameWindow::updateScore(int newScore) {
@@ -32,8 +31,8 @@ void GameWindow::clearGame() {
 
 void GameWindow::createScene() {
     m_scene = new QGraphicsScene(this);
-    m_scene->setSceneRect(0, 0, 800, 800);
-    // m_scene->setBackgroundBrush(QColor(100, 50, 80));
+    m_scene->setSceneRect(0, 0, GAME_SIZE, GAME_SIZE);
+    m_scene->setBackgroundBrush(QColor(100, 50, 80));
     setScene(m_scene);
 }
 
@@ -57,6 +56,12 @@ void GameWindow::handleScoreTimer(int scorePerSecond, int timerStep) {
     m_scoreTimer->start(timerStep);
 }
 
+void GameWindow::resizeEvent(QResizeEvent* event) {
+    QGraphicsView::resizeEvent(event);
+
+    fitInView(m_scene->sceneRect(), Qt::KeepAspectRatio);
+}
+
 bool GameWindow::startGame(const QString& mazeFile) {
     // Clean up previous game if any
     clearGame();
@@ -68,8 +73,7 @@ bool GameWindow::startGame(const QString& mazeFile) {
     handleScoreTimer(10, 1000);
 
     // Load maze
-    const int cellSize = 40;
-    MazeLoader loader(mazeFile, cellSize);
+    MazeLoader loader(mazeFile, CELL_SIZE);
     if (!loader.loadMaze(m_scene, m_pacman, m_ghosts)) {
         QMessageBox::critical(this, "Error", "Failed to load maze!");
 
