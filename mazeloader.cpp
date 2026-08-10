@@ -9,6 +9,14 @@ MazeLoader::MazeLoader(const QString &filename, int cellSize)
     : m_filename(filename), m_cellSize(cellSize) {
 }
 
+bool MazeLoader::isValidWallToken(const QString &token)
+{
+    if (token == "X" || token == "|" || token == "=")
+        return true;
+
+    return token.length() == 1 && token[0].isDigit();
+}
+
 QColor MazeLoader::getColorForToken(const QString &token) {
     if (token == "X") return Qt::darkGray;
     if (token == "0") return QColor(0, 0, 139);
@@ -76,14 +84,12 @@ bool MazeLoader::loadMaze(QGraphicsScene *scene, Pacman *&pacman, QList<Ghost*>&
             } else if (token == ".") {
 
             } else {
+                if (!isValidWallToken(token))
+                    return false;
+
                 QColor wallColor = getColorForToken(token);
-                Wall *wall = new Wall(
-                    x - m_cellSize / 2,
-                    y - m_cellSize / 2,
-                    m_cellSize,
-                    m_cellSize,
-                    wallColor
-                    );
+                Wall *wall = new Wall(x - m_cellSize / 2, y - m_cellSize / 2,
+                                      m_cellSize, m_cellSize, wallColor);
                 scene->addItem(wall);
             }
             col++;
