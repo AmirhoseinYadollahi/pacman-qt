@@ -53,9 +53,10 @@ bool MazeLoader::loadMaze(QGraphicsScene *scene, Pacman *&pacman, QList<Ghost*>&
 
         QStringList tokens = line.split(' ', Qt::SkipEmptyParts);
 
-        if (row >= MAX_SIZE || tokens.size() > MAX_SIZE)
+        if (row >= MAX_SIZE)
             return false;
-
+        if (tokens.size() < MIN_SIZE || tokens.size() > MAX_SIZE)
+            return false;
         if (mazeWidth == -1) {
             mazeWidth = tokens.size();
         } else if (tokens.size() != mazeWidth) {
@@ -100,7 +101,7 @@ bool MazeLoader::loadMaze(QGraphicsScene *scene, Pacman *&pacman, QList<Ghost*>&
 
     if (!pacman)
         return false;
-    if (row == 0)
+    if (row < MIN_SIZE)
         return false;
     return true;
 }

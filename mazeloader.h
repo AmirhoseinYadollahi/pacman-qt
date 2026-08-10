@@ -7,6 +7,7 @@
 
 class MazeLoader {
 public:
+    static constexpr int MIN_SIZE = 10;
     static constexpr int MAX_SIZE = 19;
 
     bool isValidWallToken(const QString& token);
