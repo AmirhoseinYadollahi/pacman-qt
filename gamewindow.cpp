@@ -27,6 +27,9 @@ void GameWindow::startGame(const QString& mazeFile) {
     if (m_scene) {
         delete m_scene;
         m_scene = nullptr;
+
+        m_pacman = nullptr;
+        m_ghosts.clear();
     }
 
     // Initialize scene
