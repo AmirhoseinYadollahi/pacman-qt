@@ -7,6 +7,7 @@
 
 class MazeLoader {
 public:
+    static constexpr int MAX_SIZE = 19;
     MazeLoader(const QString &filename, int cellSize);
     // Reads the maze file and places items (walls, Pac-Man, ghosts) into the scene.
     // Returns true on success. The pointer for Pac-Man (if created) is returned via pacman,
