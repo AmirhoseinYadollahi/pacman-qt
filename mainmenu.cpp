@@ -9,7 +9,6 @@ mainMenu::mainMenu(QWidget *parent)
     ui->setupUi(this);
 
     connect(ui->exitButton, &QPushButton::clicked, this, &QMainWindow::close);
-    connect(ui->exitButton, &QPushButton::clicked, this, &QMainWindow::deleteLater);
 }
 
 mainMenu::~mainMenu() {
