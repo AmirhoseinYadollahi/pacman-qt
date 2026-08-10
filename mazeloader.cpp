@@ -34,12 +34,18 @@ bool MazeLoader::loadMaze(QGraphicsScene *scene, Pacman *&pacman, QList<Ghost*>&
     }
 
     QTextStream in(&file);
+
     int row = 0;
     while (!in.atEnd()) {
         QString line = in.readLine().trimmed();
-        if (line.isEmpty()) continue;
+        if (line.isEmpty())
+            continue;
 
         QStringList tokens = line.split(' ', Qt::SkipEmptyParts);
+
+        if (row >= MAX_SIZE || tokens.size() > MAX_SIZE)
+            return false;
+
         int col = 0;
         for (const QString &token : tokens) {
             qreal x = col * m_cellSize + m_cellSize / 2;
@@ -60,15 +66,17 @@ bool MazeLoader::loadMaze(QGraphicsScene *scene, Pacman *&pacman, QList<Ghost*>&
 
             } else {
                 QColor wallColor = getColorForToken(token);
-                Wall *wall = new Wall(x - m_cellSize / 2, y - m_cellSize / 2,
-                                      m_cellSize, m_cellSize, wallColor);
+                Wall *wall = new Wall(
+                    x - m_cellSize / 2,
+                    y - m_cellSize / 2,
+                    m_cellSize,
+                    m_cellSize,
+                    wallColor
+                    );
                 scene->addItem(wall);
             }
             col++;
         }
         row++;
     }
-
-    file.close();
-    return true;
 }
