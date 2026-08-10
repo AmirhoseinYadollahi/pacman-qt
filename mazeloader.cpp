@@ -65,6 +65,9 @@ bool MazeLoader::loadMaze(QGraphicsScene *scene, Pacman *&pacman, QList<Ghost*>&
                     pacman->setPos(x, y);
                     scene->addItem(pacman);
                 }
+                else {
+                    return false;
+                }
             } else if (token.toLower() == "g") {
                 Ghost *ghost = new Ghost(Qt::red, m_cellSize);
                 ghost->setPos(x, y);
@@ -89,6 +92,8 @@ bool MazeLoader::loadMaze(QGraphicsScene *scene, Pacman *&pacman, QList<Ghost*>&
     }
     file.close();
 
+    if (!pacman)
+        return false;
     if (row == 0)
         return false;
     return true;
