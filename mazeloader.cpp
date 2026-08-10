@@ -57,8 +57,6 @@ bool MazeLoader::loadMaze(QGraphicsScene *scene, Pacman *&pacman, QList<Ghost*>&
                 ghosts.append(ghost);
             } else if (token == ".") {
 
-            } else if (token == " ") {
-
             } else {
                 QColor wallColor = getColorForToken(token);
                 Wall *wall = new Wall(x - m_cellSize / 2, y - m_cellSize / 2,
