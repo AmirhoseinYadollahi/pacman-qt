@@ -1,0 +1,48 @@
+PAC-MAN MAZE CREATION GUIDE
+===========================
+
+This file explains how to create custom mazes for the Pac-Man game.
+
+1. BASIC RULES
+- Maze must be a plain text file (.txt)
+- Must be 19 rows x 19 columns (like maze2.txt)
+- Each character must be separated by a space
+- One line in file = one row in maze
+
+2. CHARACTER MEANINGS
+X  = Solid wall (dark gray, blocks movement)
+.  = Pellet (small dot that gives points)
+P  = Pac-Man starting position
+G/g = Ghost (enemy that chases Pac-Man)
+(space) = Empty walkable path
+
+3. SPECIAL WALLS (optional)
+These are decorative walls that still block movement:
+0 = Dark blue wall
+1 = Blue
+2 = Cyan
+3 = Red
+4 = Magenta
+5 = Purple
+6 = Green
+7 = Orange
+8 = Yellow
+9 = Light blue
+| = Gray wall
+= = Light gray wall
+
+4. EXAMPLE MAZE (first few rows):
+X X X X X X X X X X X X X X X X X
+X . . . . X . . . . . X . . . g X
+X . X X . X . X X X . X . X X . X
+X . X . . . . X . X . . . . X . X
+X . X X X X X X . X X X X X X . X
+X . . . . . . . P . . . . . . . X
+
+5. TIPS:
+- Always include exactly one "P" for Pac-Man
+- Ghosts ("g" or "G") can be placed anywhere
+- Walls should completely surround the maze
+- Keep paths wide enough for Pac-Man to move
+
+Save your custom maze as a .txt file and select it in the game's menu!
