@@ -1,7 +1,7 @@
 #include "ghost.h"
 #include "wall.h"
 #include <QGraphicsScene>
-#include <cmath>
+
 Ghost::Ghost(const QColor &color, int cellSize, QGraphicsItem *parent)
     : QGraphicsObject(parent), m_color(color), m_cellSize(cellSize), m_size(cellSize * 0.8)
 {

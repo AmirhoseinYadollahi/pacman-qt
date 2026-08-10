@@ -1,7 +1,6 @@
 #include "pacman.h"
 #include "wall.h"
 #include <QGraphicsScene>
-#include <QDebug>
 #include <QtMath>
 
 Pacman::Pacman(int cellSize)

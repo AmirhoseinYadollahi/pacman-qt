@@ -3,7 +3,6 @@
 #include <QFile>
 #include <QTextStream>
 #include <QStringList>
-#include <QDebug>
 
 MazeLoader::MazeLoader(const QString &filename, int cellSize)
     : m_filename(filename), m_cellSize(cellSize) {
