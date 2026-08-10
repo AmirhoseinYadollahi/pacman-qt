@@ -8,7 +8,7 @@ class GameWindow : public QGraphicsView {
 public:
     explicit GameWindow(QWidget *parent = nullptr);
     void updateScore(int newScore);
-    void startGame(const QString& mazeFile = "maze2.txt");
+    bool startGame(const QString& mazeFile = "maze2.txt");
 
 private:
     QGraphicsScene* m_scene;

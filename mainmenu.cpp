@@ -20,12 +20,17 @@ void mainMenu::on_playButton_clicked() {
     this->hide();
 
     m_gameWindow = new GameWindow();
-    m_gameWindow->startGame(m_selectedMap);
     connect(m_gameWindow, &QObject::destroyed, this, [this]() {
         show();
     });
 
-     m_gameWindow->show();
+    bool canBeStarted = m_gameWindow->startGame(m_selectedMap);
+    if (!canBeStarted) {
+        m_gameWindow->close();
+        return;
+    }
+
+    m_gameWindow->show();
 }
 
 void mainMenu::on_chooseMapButton_clicked() {

@@ -22,7 +22,7 @@ void GameWindow::updateScore(int newScore) {
     m_scoreText->setPlainText("Score: " + QString::number(newScore));
 }
 
-void GameWindow::startGame(const QString& mazeFile) {
+bool GameWindow::startGame(const QString& mazeFile) {
     // Clean up previous game if any
     if (m_scene) {
         delete m_scene;
@@ -61,7 +61,8 @@ void GameWindow::startGame(const QString& mazeFile) {
     MazeLoader loader(mazeFile, cellSize);
     if (!loader.loadMaze(m_scene, m_pacman, m_ghosts)) {
         QMessageBox::critical(this, "Error", "Failed to load maze!");
-        return;
+        delete(m_scene);
+        return false;
     }
 
 
@@ -96,4 +97,6 @@ void GameWindow::startGame(const QString& mazeFile) {
     QRect screenGeometry = QGuiApplication::primaryScreen()->availableGeometry();
     move((screenGeometry.width() - width()) / 2,
          (screenGeometry.height() - height()) / 2);
+
+    return true;
 }
