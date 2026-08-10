@@ -36,6 +36,8 @@ bool MazeLoader::loadMaze(QGraphicsScene *scene, Pacman *&pacman, QList<Ghost*>&
     QTextStream in(&file);
 
     int row = 0;
+    int mazeWidth = -1;
+
     while (!in.atEnd()) {
         QString line = in.readLine().trimmed();
         if (line.isEmpty())
@@ -45,6 +47,12 @@ bool MazeLoader::loadMaze(QGraphicsScene *scene, Pacman *&pacman, QList<Ghost*>&
 
         if (row >= MAX_SIZE || tokens.size() > MAX_SIZE)
             return false;
+
+        if (mazeWidth == -1) {
+            mazeWidth = tokens.size();
+        } else if (tokens.size() != mazeWidth) {
+            return false;
+        }
 
         int col = 0;
         for (const QString &token : tokens) {
