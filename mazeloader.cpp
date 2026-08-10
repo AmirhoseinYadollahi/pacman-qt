@@ -87,4 +87,9 @@ bool MazeLoader::loadMaze(QGraphicsScene *scene, Pacman *&pacman, QList<Ghost*>&
         }
         row++;
     }
+    file.close();
+
+    if (row == 0)
+        return false;
+    return true;
 }
