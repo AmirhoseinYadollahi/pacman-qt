@@ -11,6 +11,8 @@ public:
     bool startGame(const QString& mazeFile = "maze2.txt");
 
 private:
+    void clearGame();
+
     QGraphicsScene* m_scene;
     Pacman* m_pacman;
     QList<Ghost*> m_ghosts;
