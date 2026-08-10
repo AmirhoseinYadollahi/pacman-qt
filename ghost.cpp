@@ -5,7 +5,7 @@
 Ghost::Ghost(const QColor &color, int cellSize, QGraphicsItem *parent)
     : QGraphicsObject(parent), m_color(color), m_cellSize(cellSize), m_size(cellSize * 0.8)
 {
-    m_ghostPixmap.load(":Images/../Images/ghost.png");
+    m_ghostPixmap.load(":/Images/ghost.png");
 
     if (!m_ghostPixmap.isNull()) {
         m_ghostPixmap = m_ghostPixmap.scaled(m_size, m_size, Qt::KeepAspectRatio, Qt::SmoothTransformation);
