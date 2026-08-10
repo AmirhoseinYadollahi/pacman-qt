@@ -12,6 +12,9 @@ public:
 
 private:
     void clearGame();
+    void createScene();
+    void createScoreDisplay();
+    void handleScoreTimer(int scorePerSecond, int timerStep);
 
     QGraphicsScene* m_scene;
     Pacman* m_pacman;

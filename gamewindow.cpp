@@ -30,17 +30,14 @@ void GameWindow::clearGame() {
     m_ghosts.clear();
 }
 
-bool GameWindow::startGame(const QString& mazeFile) {
-    // Clean up previous game if any
-    clearGame();
-
-    // Initialize scene
+void GameWindow::createScene() {
     m_scene = new QGraphicsScene(this);
     m_scene->setSceneRect(0, 0, 800, 800);
-    m_scene->setBackgroundBrush(QColor(0, 0, 80));
+    // m_scene->setBackgroundBrush(QColor(100, 50, 80));
     setScene(m_scene);
+}
 
-    // Create score display
+void GameWindow::createScoreDisplay() {
     m_score = 0;
     m_scoreText = new QGraphicsTextItem();
     m_scoreText->setDefaultTextColor(Qt::yellow);
@@ -49,14 +46,26 @@ bool GameWindow::startGame(const QString& mazeFile) {
     m_scoreText->setPos(20, 20);  // Top-left position
     m_scoreText->setZValue(100);  // Ensure it's on top
     m_scene->addItem(m_scoreText);
+}
 
+void GameWindow::handleScoreTimer(int scorePerSecond, int timerStep) {
     m_scoreTimer = new QTimer(this);
-    connect(m_scoreTimer, &QTimer::timeout, [this](){
-        m_score += 10;
+    connect(m_scoreTimer, &QTimer::timeout, [this, scorePerSecond](){
+        m_score += scorePerSecond;
         this->updateScore(m_score);
     });
-    m_scoreTimer->start(1000);
+    m_scoreTimer->start(timerStep);
+}
 
+bool GameWindow::startGame(const QString& mazeFile) {
+    // Clean up previous game if any
+    clearGame();
+
+    // Initialize scene
+    createScene();
+
+    createScoreDisplay();
+    handleScoreTimer(10, 1000);
 
     // Load maze
     const int cellSize = 40;
