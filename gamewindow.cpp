@@ -32,7 +32,7 @@ void GameWindow::clearGame() {
 void GameWindow::createScene() {
     m_scene = new QGraphicsScene(this);
     m_scene->setSceneRect(0, 0, GAME_SIZE, GAME_SIZE);
-    m_scene->setBackgroundBrush(QColor(100, 50, 80));
+    m_scene->setBackgroundBrush(QColor(0, 0, 80));
     setScene(m_scene);
 }
 
@@ -89,11 +89,10 @@ bool GameWindow::startGame(const QString& mazeFile) {
 
         for (QGraphicsItem* item : m_pacman->collidingItems()) {
             if (dynamic_cast<Ghost*>(item)) {
-                // Stop score timer first
-                if (m_scoreTimer) {
-                    m_scoreTimer->stop();
-                }
 
+                if (m_scoreTimer) m_scoreTimer->stop();
+
+                m_pacman->stopPacman();
                 QMessageBox::information(this, "Game Over",
                                          QString("Pac-Man was caught by a ghost!\nFinal Score: %1").arg(m_score));
                 close();
@@ -103,7 +102,6 @@ bool GameWindow::startGame(const QString& mazeFile) {
     });
     m_collisionTimer->start(100);
 
-    // Focus Pac-Man
     if (m_pacman) {
         m_pacman->setFocus();
         m_scene->setFocusItem(m_pacman);

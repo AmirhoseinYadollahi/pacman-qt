@@ -44,7 +44,6 @@ void Pacman::setDirection(const QPointF &dir) {
 
 void Pacman::movePacman() {
     if (!m_nextDirection.isNull()) {
-        // FIX: Calculate cell position correctly
         int col = qRound((pos().x() - m_cellSize/2) / m_cellSize);
         qreal xCenter = col * m_cellSize + m_cellSize/2;
         int row = qRound((pos().y() - m_cellSize/2) / m_cellSize);
@@ -105,6 +104,12 @@ void Pacman::movePacman() {
     }
 
     m_mouthOpen = !m_mouthOpen;
+    update();
+}
+
+void Pacman::stopPacman() {
+    m_timer->stop();
+    m_direction = QPointF(0, 0);
     update();
 }
 

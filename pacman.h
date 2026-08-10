@@ -13,6 +13,7 @@ public:
 
     void setDirection(const QPointF &dir);
     bool isMoving() const { return !m_direction.isNull(); }
+    void stopPacman();
 
 public slots:
     void movePacman();
