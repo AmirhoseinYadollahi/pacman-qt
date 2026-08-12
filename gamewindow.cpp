@@ -32,7 +32,7 @@ void GameWindow::clearGame() {
 void GameWindow::createScene() {
     m_scene = new QGraphicsScene(this);
     m_scene->setSceneRect(0, 0, GAME_SIZE, GAME_SIZE);
-    m_scene->setBackgroundBrush(QColor(0, 0, 80));
+    m_scene->setBackgroundBrush(QColor(4, 69, 127));
     setScene(m_scene);
 }
 
